@@ -10,5 +10,5 @@ fun main() {
         for (j in i + 1..i + cnt) c[j] += c[i]
         c[i]
     }
-    println(c.sum())
+    println(sum)
 }
