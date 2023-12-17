@@ -3,27 +3,17 @@ fun main() {
     val (n, m) = a.size2()
     val (di, dj) = RDLU_DIRS
     data class Pos(val i: Int, val j: Int, val d: Int, val k: Int)
-    val v = HashMap<Pos, Int>()
-    val q = HashSet<Pos>()
+    val heap = Heap<Pos, Int>()
+    val done = HashSet<Pos>()
     fun enq(i: Int, j: Int, d: Int, k: Int, c: Int) {
         val p = Pos(i, j, d, k)
-        val cp = v[p]
-        if (cp != null && c >= cp) return
-        v[p] = c
-        q.add(p)
+        if (p in done) return
+        heap.putBetter(p, c)
     }
     enq(0, 0, 0, 0, 0)
     while (true) {
-        var p: Pos = q.first()
-        var c = v[p]!!
-        for (pp in q) {
-            val cc = v[pp]!!
-            if (cc < c) {
-                c = cc
-                p = pp
-            }
-        }
-        q.remove(p)
+        val (p, c) = heap.removeMin()
+        done += p
         if (p.i == n - 1 && p.j == m - 1) {
             println(c)
             break
