@@ -36,14 +36,7 @@ fun main() {
         q += P2(i, j)
         cnt++
     }
-    for (i in 0..<n) {
-        enq(i, 0)
-        enq(i, m - 1)
-    }
-    for (j in 0..<m) {
-        enq(0, j)
-        enq(n - 1, j)
-    }
+    enq(0, 0)
     while (!q.isEmpty()) {
         val (i, j) = q.removeFirst()
         for (d in 0..3) {
